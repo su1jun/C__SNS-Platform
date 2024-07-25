@@ -1,4 +1,5 @@
 import { BsHouseFill, BsBellFill } from 'react-icons/bs';
+import { BiLogOut } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 
 import SidebarItem from './SidebarItem';
@@ -36,6 +37,7 @@ const Sidebar = () => {
                 label={item.label}
               />
             ))}
+            <SidebarItem onClick={() => {}} icon={BiLogOut}/>
           </div>
         </div>
       </div>
