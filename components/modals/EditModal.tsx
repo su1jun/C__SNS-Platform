@@ -6,6 +6,9 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import useEditModal from "@/hooks/useEditModal";
 import useUser from "@/hooks/useUser";
 
+import Input from "../Input";
+import Modal from "../Modal";
+
 const EditModal = () => {
   const { data: currentUser } = useCurrentUser(); // Fetch current user data
   const { mutate: mutateFetchedUser } = useUser(currentUser?.id); // Get mutate function for user data
@@ -53,8 +56,40 @@ const EditModal = () => {
     }
   }, [editModal, name, username, bio, mutateFetchedUser, profileImage, coverImage]);
 
+  // Define modal body content
+  const bodyContent = (
+    <div className="flex flex-col gap-4">
+      <Input
+        placeholder="Name"
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        disabled={isLoading}  
+      />
+      <Input 
+        placeholder="Username"
+        onChange={(e) => setUsername(e.target.value)}
+        value={username}
+        disabled={isLoading} 
+      />
+      <Input 
+        placeholder="Bio"
+        onChange={(e) => setBio(e.target.value)}
+        value={bio}
+        disabled={isLoading} 
+      />
+    </div>
+  )
+
   return (
-    <div></div>
+    <Modal
+      disabled={isLoading}
+      isOpen={editModal.isOpen}
+      title="Edit your profile"
+      actionLabel="Save"
+      onClose={editModal.onClose}
+      onSubmit={onSubmit}
+      body={bodyContent}
+    />
   );
 }
 
