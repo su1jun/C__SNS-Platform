@@ -42,17 +42,17 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     toggleLike();
   }, [loginModal, currentUser, toggleLike]);
 
-  // Choose appropriate like icon
-  const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
-
   // Format creation date
   const createdAt = useMemo(() => {
     if (!data?.createdAt) {
       return null;
     }
-
+    
     return formatDistanceToNowStrict(new Date(data.createdAt));
   }, [data?.createdAt])
+
+  // Choose appropriate like icon
+  const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
 
   return (
     <div 
