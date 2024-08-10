@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useUser from "@/hooks/useUser";
+import useFollow from "@/hooks/useFollow";
 import useEditModal from "@/hooks/useEditModal";
 
 import Button from "../Button";
@@ -18,6 +19,8 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
   const { data: fetchedUser } = useUser(userId); // Fetch specific user data
 
   const editModal = useEditModal(); // declare editmodal
+
+  const { isFollowing, toggleFollow } = useFollow(userId); // Fetch follow data
 
   const createdAt = useMemo(() => {
     if (!fetchedUser?.createdAt) {
@@ -38,9 +41,10 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
           />
         ) : (
           <Button // Toggle follow/unfollow button
-            onClick={() => {}}
-            label='Follow'
-            secondary
+            onClick={toggleFollow} 
+            label={isFollowing ? 'Unfollow' : 'Follow'}
+            secondary={!isFollowing}
+            outline={isFollowing}
           />
         )}
       </div>
