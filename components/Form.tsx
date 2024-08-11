@@ -37,7 +37,9 @@ const Form: React.FC<FormProps> = ({
     try {
       setIsLoading(true);
 
-      const url = isComment ? `/api/comments?postId=${postId}` : '/api/posts';
+      const url = isComment 
+        ? `/api/comments?postId=${postId}` 
+        : '/api/posts';
 
       await axios.post(url, { body });
 
