@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react';
 import { BsHouseFill, BsBellFill } from 'react-icons/bs';
 import { BiLogOut } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
@@ -13,15 +14,16 @@ const Sidebar = () => {
 
   const items = [
     {
+      icon: BsHouseFill,
       label: 'Home',
       href: '/',
-      icon: BsHouseFill,
     },
     {
       label: 'Notifications',
       href: '/notifications',
       icon: BsBellFill,
       auth: true,
+      alert: currentUser?.hasNotification
     },
     {
       label: 'Profile',
@@ -42,6 +44,7 @@ const Sidebar = () => {
                 href={item.href} 
                 icon={item.icon} 
                 label={item.label}
+                alert={item.alert}
               />
             ))}
             {currentUser && (
